@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirm Your Response</title>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #fff6f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  h2 {
+    color: #b23a48;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-top: 12px;
+    font-size: 1rem;
+  }
+
+  button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 12px;
+    background: #b23a48;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+    position: relative;
+  }
+
+  button:hover {
+    background: #932f3d;
+  }
+
+  button:disabled {
+    background: #a65b68;
+    cursor: not-allowed;
+  }
+
+  /* Spinner animation */
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+    margin-left: 8px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .success {
+    margin-top: 20px;
+    background: #e9ffe9;
+    padding: 12px;
+    border-radius: 6px;
+    color: #2d7a2d;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Almost Done!</h2>
+  <p>Please enter your name to complete your RSVP.</p>
+
+  <p><strong>Your Response:</strong> <span id="respText"></span></p>
+
+  <input type="text" id="nameInput" placeholder="Enter your full name">
+
+  <button id="submitBtn">Submit RSVP</button>
+
+  <div class="success" id="successBox">✅ Thank you! Your RSVP has been recorded.</div>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const rsvpResponse = params.get("rsvp") || "Unknown";
+  document.getElementById("respText").textContent = rsvpResponse;
+
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxf-qKBVQ-r2-gHgpUfZxDTZ5sB5FuM6c9MqaGof-cF3WZCEajRd65d3DF84FDDu--P/exec";
+  const submitBtn = document.getElementById("submitBtn");
+  const successBox = document.getElementById("successBox");
+
+  submitBtn.onclick = async () => {
+    const name = document.getElementById("nameInput").value.trim();
+    if (!name) {
+      alert("Please enter your name.");
+      return;
+    }
+
+    // Disable and show spinner
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `Submitting <span class="spinner"></span>`;
+
+    try {
+      // Fire the request (no-cors mode, cannot await a response)
+      fetch(scriptURL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, response: rsvpResponse })
+      });
+
+      // Keep spinner for a short while to show feedback
+      setTimeout(() => {
+        submitBtn.innerHTML = "Submitted ✅";
+        successBox.style.display = "block";
+      }, 2000); // shows spinner for ~2 seconds
+    } catch (err) {
+      alert("There was an issue submitting your response.");
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = "Submit RSVP";
+    }
+  };
+</script>
+
+</body>
+</html>

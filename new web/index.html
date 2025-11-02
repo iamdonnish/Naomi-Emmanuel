@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noble Wedding Invitation</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #fffaf5; /* milky text color */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100vh;
+      background-color: #fff6f8;
+      background-image: url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .overlay {
+      background-color: rgba(128, 0, 32, 0.9); /* deep wine tone with opacity */
+      backdrop-filter: blur(6px);
+      border-radius: 18px;
+      padding: 45px 30px;
+      max-width: 550px;
+      width: 90%;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      z-index: 2;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      color: #ffe8e8; /* soft milky-pink */
+      margin: 0;
+    }
+
+    h2 {
+      font-weight: 400;
+      color: #fbeeea; /* milky cream */
+      font-size: 1.2em;
+      margin: 10px 0 20px 0;
+    }
+
+    .details {
+      font-size: 1em;
+      line-height: 1.7;
+      color: #fffaf5; /* milky text */
+    }
+
+    .button {
+      background-color: #f5d5cf; /* soft milky-rose */
+      color: #5a0d1c; /* deep wine for contrast */
+      border: none;
+      padding: 14px 28px;
+      margin: 8px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 500;
+    }
+
+    .button:hover {
+      background-color: #fff1eb;
+      transform: scale(1.05);
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.9em;
+      color: #fff8f5;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="overlay">
+    <h1>Naomi & Emmanuel</h1>
+    <h2>Together With Their Families, Joyfully Invite You To Celebrate Their Love</h2>
+
+    <div class="details">
+      <p>📅 <strong>Date:</strong> Friday, January 23rd, 2026</p>
+      <p>📍 <strong>Venue:</strong> Bromley Events Place And Apartments Plot C102A, Road 522B Close, 1st Avenue Gwarimpa, Abuja</p>
+      <p>🕖 <strong>Time:</strong> 01:30 PM Prompt</p>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <button class="button" onclick="goToForm('Yes')">Yes, I'll be there</button>
+      <button class="button" onclick="goToForm('No')">No, I won't make it</button>
+    </div>
+
+    <footer>We can’t wait to celebrate this special day with you 💕</footer>
+  </div>
+
+<script>
+  function goToForm(response) {
+    document.body.style.opacity = "0.6";
+    setTimeout(() => {
+      window.location.href = `response.html?rsvp=${response}`;
+    }, 300);
+  }
+</script>
+
+</body>
+</html>
