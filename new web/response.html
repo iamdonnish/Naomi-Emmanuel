@@ -14,7 +14,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
   }
 
   .container {
@@ -23,7 +23,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     width: 90%;
-    max-width: 400px;
+    max-width: 420px;
     text-align: center;
   }
 
@@ -63,7 +63,6 @@
     cursor: not-allowed;
   }
 
-  /* Spinner animation */
   .spinner {
     display: inline-block;
     width: 16px;
@@ -88,6 +87,40 @@
     color: #2d7a2d;
     display: none;
   }
+
+  /* Important notice styling */
+  .notice {
+    text-align: left;
+    margin-top: 25px;
+    background: #fff1f3;
+    border-left: 4px solid #b23a48;
+    padding: 15px 18px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #5a0d1c;
+  }
+
+  .notice h3 {
+    margin-top: 0;
+    color: #b23a48;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+
+  .notice ul {
+    margin: 10px 0 0 18px;
+    padding: 0;
+  }
+
+  .notice li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .notice strong {
+    color: #000;
+    font-weight: 600;
+  }
 </style>
 </head>
 <body>
@@ -103,6 +136,23 @@
   <button id="submitBtn">Submit RSVP</button>
 
   <div class="success" id="successBox">✅ Thank you! Your RSVP has been recorded.</div>
+
+  <!-- 📝 Important Notice Section -->
+  <div class="notice">
+    <h3>Important Notice</h3>
+    <ul>
+      <li>This event is <strong>strictly by invitation only</strong>, unless otherwise stated on your invitation.</li>
+      <li><strong>Adults only.</strong></li>
+      <li>Kindly RSVP by <strong>January 20th, 2026</strong>. Please respond as soon as possible.</li>
+      <li>Spraying of money is <strong>not permitted.</strong> If you wish to give a gift, please send to:<br>
+        <strong>2336302810 – United Bank for Africa (UBA)<br>
+        Account Name: Naomi Ngozi Umah</strong><br>
+        (BTC and USDT are also accepted)
+      </li>
+      <li>Colour of the day: <strong>Nude or White.</strong></li>
+      <li>Guests are kindly requested to <strong>exit the venue by 6:30 PM</strong>, after the reception concludes.</li>
+    </ul>
+  </div>
 </div>
 
 <script>
@@ -121,12 +171,10 @@
       return;
     }
 
-    // Disable and show spinner
     submitBtn.disabled = true;
     submitBtn.innerHTML = `Submitting <span class="spinner"></span>`;
 
     try {
-      // Fire the request (no-cors mode, cannot await a response)
       fetch(scriptURL, {
         method: "POST",
         mode: "no-cors",
@@ -134,11 +182,10 @@
         body: JSON.stringify({ name, response: rsvpResponse })
       });
 
-      // Keep spinner for a short while to show feedback
       setTimeout(() => {
         submitBtn.innerHTML = "Submitted ✅";
         successBox.style.display = "block";
-      }, 2000); // shows spinner for ~2 seconds
+      }, 2000);
     } catch (err) {
       alert("There was an issue submitting your response.");
       submitBtn.disabled = false;
