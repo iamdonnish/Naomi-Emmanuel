@@ -77,6 +77,38 @@
       transform: scale(1.05);
     }
 
+    /* Countdown styling */
+    #countdown {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .time-box {
+      background-color: rgba(255, 245, 240, 0.2);
+      border: 1px solid rgba(255, 230, 230, 0.4);
+      border-radius: 12px;
+      padding: 10px 15px;
+      min-width: 65px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 1.4em;
+      font-weight: 600;
+      color: #fffaf5;
+    }
+
+    .label {
+      font-size: 0.75em;
+      color: #ffeaea;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
     footer {
       margin-top: 25px;
       font-size: 0.9em;
@@ -93,6 +125,7 @@
     <div class="details">
       <p>📅 <strong>Date:</strong> Friday, January 23rd, 2026</p>
       <p>📍 <strong>Venue:</strong> Kingdom Hall Of Jehovah's Witnesses, Plot C12, 521 Road, Gwarinpa II Estate, FCT-Abuja</p>
+<p>🕖 <strong>Time:</strong> 11:00 AM Prompt</p>
       <p>📍 <strong>Reception:</strong> Bromley Events Place And Apartments Plot C102A, Road 522B Close, 1st Avenue Gwarimpa, Abuja</p>
       <p>🕖 <strong>Time:</strong> 01:30 PM Prompt</p>
     </div>
@@ -102,18 +135,64 @@
       <button class="button" onclick="goToForm('No')">No, I won't make it</button>
     </div>
 
+    <!-- 🎉 Boxed countdown -->
+    <div id="countdown">
+      <div class="time-box">
+        <span id="days">0</span>
+        <div class="label">Days</div>
+      </div>
+      <div class="time-box">
+        <span id="hours">0</span>
+        <div class="label">Hours</div>
+      </div>
+      <div class="time-box">
+        <span id="minutes">0</span>
+        <div class="label">Minutes</div>
+      </div>
+      <div class="time-box">
+        <span id="seconds">0</span>
+        <div class="label">Seconds</div>
+      </div>
+    </div>
+
     <footer>We can’t wait to celebrate this special day with you 💕</footer>
   </div>
 
-<script>
-  function goToForm(response) {
-    document.body.style.opacity = "0.6";
-    setTimeout(() => {
-      window.location.href = `response.html?rsvp=${response}`;
-    }, 300);
-  }
-</script>
+  <script>
+    // RSVP redirect
+    function goToForm(response) {
+      document.body.style.opacity = "0.6";
+      setTimeout(() => {
+        window.location.href = `response.html?rsvp=${response}`;
+      }, 300);
+    }
+
+    // Countdown timer
+    const weddingDate = new Date("January 23, 2026 13:30:00").getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "<span style='font-size:1.5em;'>It's Wedding Time! 💍</span>";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 
 </body>
 </html>
-
