@@ -25,6 +25,7 @@
       width: 90%;
       max-width: 420px;
       text-align: center;
+      position: relative;
     }
 
     h2 {
@@ -88,7 +89,7 @@
       display: none;
     }
 
-    /* Important notice styling */
+    /* Important Notice Styling */
     .notice {
       text-align: left;
       margin-top: 25px;
@@ -136,15 +137,21 @@
       margin: 5px 0;
       font-size: 1rem;
     }
+
     .event-info img {
-  margin-top: 15px;
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+      margin-top: 15px;
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
+    .event-info img:hover {
+      transform: scale(1.02);
+    }
 
-    /* Get Location button */
+    /* Get Location Button */
     #getLocationBtn {
       margin-top: 15px;
       width: 100%;
@@ -160,6 +167,52 @@
 
     #getLocationBtn:hover {
       background: #5d1420;
+    }
+
+    /* Popup Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      overflow: auto;
+      padding-top: 80px;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .closeBtn {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .closeBtn:hover {
+      color: #ff7b8a;
+    }
+
+    @media screen and (max-width: 600px) {
+      .modal-content {
+        width: 95%;
+      }
     }
 
   </style>
@@ -187,9 +240,17 @@
     <p><strong>Reception:</strong> Bromley Events Place, Gwarinpa, Abuja</p>
     <p><strong>Reception Time:</strong> 01:30 PM</p>
 
-    <!-- 🗺️ New Get Location Button -->
+    <!-- 🗺️ Get Location Button -->
     <button id="getLocationBtn">📍 Get Location</button>
-    <img src="Images/Naomi-emmanuel.jpg" alt="Event Venue">
+
+    <!-- 📸 Event Image -->
+    <img id="eventImage" src="Images/Naomi-emmanuel.jpg" alt="Event Venue">
+  </div>
+
+  <!-- 🔍 Image Popup Modal -->
+  <div id="imageModal" class="modal">
+    <span class="closeBtn">&times;</span>
+    <img class="modal-content" id="modalImg" alt="Event Photo">
   </div>
 
   <!-- 📝 Important Notice Section -->
@@ -219,6 +280,7 @@
     eventInfo.style.display = "block";
   }
 
+  // Google Sheet RSVP Submission
   const scriptURL = "https://script.google.com/macros/s/AKfycbxf-qKBVQ-r2-gHgpUfZxDTZ5sB5FuM6c9MqaGof-cF3WZCEajRd65d3DF84FDDu--P/exec";
   const submitBtn = document.getElementById("submitBtn");
   const successBox = document.getElementById("successBox");
@@ -252,17 +314,35 @@
     }
   };
 
-  // 📍 Open actual Google Maps link when user clicks "Get Location"
+  // 📍 Open Google Maps link when user clicks "Get Location"
   const locationBtn = document.getElementById("getLocationBtn");
   if (locationBtn) {
     locationBtn.addEventListener("click", () => {
       window.open("https://maps.app.goo.gl/dXFU8Tp1yr469agi7", "_blank");
     });
   }
+
+  // 🖼️ Popup Image Modal Logic
+  const eventImage = document.getElementById("eventImage");
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImg");
+  const closeBtn = document.querySelector(".closeBtn");
+
+  eventImage.onclick = function() {
+    modal.style.display = "flex";
+    modalImg.src = this.src;
+  };
+
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  };
+
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  };
 </script>
 
 </body>
 </html>
-
-
-
