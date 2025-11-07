@@ -137,6 +137,24 @@
       font-size: 1rem;
     }
 
+    /* Get Location button */
+    #getLocationBtn {
+      margin-top: 15px;
+      width: 100%;
+      background: #7c1e2c;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #getLocationBtn:hover {
+      background: #5d1420;
+    }
+
   </style>
 </head>
 <body>
@@ -161,6 +179,9 @@
     <p><strong>Time:</strong> 11:00 AM</p>
     <p><strong>Reception:</strong> Bromley Events Place, Gwarinpa, Abuja</p>
     <p><strong>Reception Time:</strong> 01:30 PM</p>
+
+    <!-- 🗺️ New Get Location Button -->
+    <button id="getLocationBtn">📍 Get Location</button>
   </div>
 
   <!-- 📝 Important Notice Section -->
@@ -183,9 +204,11 @@
   const rsvpResponse = params.get("rsvp") || "Unknown";
   document.getElementById("respText").textContent = rsvpResponse;
 
+  const eventInfo = document.getElementById("eventInfo");
+
   // Show event info only if the response is "Yes"
   if (rsvpResponse.toLowerCase() === "yes") {
-    document.getElementById("eventInfo").style.display = "block";
+    eventInfo.style.display = "block";
   }
 
   const scriptURL = "https://script.google.com/macros/s/AKfycbxf-qKBVQ-r2-gHgpUfZxDTZ5sB5FuM6c9MqaGof-cF3WZCEajRd65d3DF84FDDu--P/exec";
@@ -220,6 +243,14 @@
       submitBtn.innerHTML = "Submit RSVP";
     }
   };
+
+  // 📍 Open actual Google Maps link when user clicks "Get Location"
+  const locationBtn = document.getElementById("getLocationBtn");
+  if (locationBtn) {
+    locationBtn.addEventListener("click", () => {
+      window.open("https://maps.app.goo.gl/dXFU8Tp1yr469agi7", "_blank");
+    });
+  }
 </script>
 
 </body>
