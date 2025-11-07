@@ -1,127 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Confirm Your Response</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm Your Response</title>
 
-<style>
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: #fff6f8;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fff6f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-  .container {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    width: 90%;
-    max-width: 420px;
-    text-align: center;
-  }
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+    }
 
-  h2 {
-    color: #b23a48;
-  }
+    h2 {
+      color: #b23a48;
+    }
 
-  input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    margin-top: 12px;
-    font-size: 1rem;
-  }
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 12px;
+      font-size: 1rem;
+    }
 
-  button {
-    margin-top: 18px;
-    width: 100%;
-    padding: 12px;
-    background: #b23a48;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s ease;
-    position: relative;
-  }
+    button {
+      margin-top: 18px;
+      width: 100%;
+      padding: 12px;
+      background: #b23a48;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+      position: relative;
+    }
 
-  button:hover {
-    background: #932f3d;
-  }
+    button:hover {
+      background: #932f3d;
+    }
 
-  button:disabled {
-    background: #a65b68;
-    cursor: not-allowed;
-  }
+    button:disabled {
+      background: #a65b68;
+      cursor: not-allowed;
+    }
 
-  .spinner {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    vertical-align: middle;
-    margin-left: 8px;
-  }
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
 
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
-  .success {
-    margin-top: 20px;
-    background: #e9ffe9;
-    padding: 12px;
-    border-radius: 6px;
-    color: #2d7a2d;
-    display: none;
-  }
+    .success {
+      margin-top: 20px;
+      background: #e9ffe9;
+      padding: 12px;
+      border-radius: 6px;
+      color: #2d7a2d;
+      display: none;
+    }
 
-  /* Important notice styling */
-  .notice {
-    text-align: left;
-    margin-top: 25px;
-    background: #fff1f3;
-    border-left: 4px solid #b23a48;
-    padding: 15px 18px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    color: #5a0d1c;
-  }
+    /* Important notice styling */
+    .notice {
+      text-align: left;
+      margin-top: 25px;
+      background: #fff1f3;
+      border-left: 4px solid #b23a48;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #5a0d1c;
+    }
 
-  .notice h3 {
-    margin-top: 0;
-    color: #b23a48;
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
+    .notice h3 {
+      margin-top: 0;
+      color: #b23a48;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
 
-  .notice ul {
-    margin: 10px 0 0 18px;
-    padding: 0;
-  }
+    .notice ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
 
-  .notice li {
-    margin-bottom: 8px;
-    line-height: 1.5;
-  }
+    .notice li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
 
-  .notice strong {
-    color: #000;
-    font-weight: 600;
-  }
-</style>
+    .notice strong {
+      color: #000;
+      font-weight: 600;
+    }
+
+    /* Event Info Section */
+    .event-info {
+      margin-top: 20px;
+      display: none;
+      background: #fbe1e1;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .event-info p {
+      margin: 5px 0;
+      font-size: 1rem;
+    }
+
+  </style>
 </head>
 <body>
 
@@ -137,6 +153,16 @@
 
   <div class="success" id="successBox">✅ Thank you! Your RSVP has been recorded.</div>
 
+  <!-- 🎉 Event Details for 'Yes' Responders -->
+  <div class="event-info" id="eventInfo">
+    <h3>Event Details:</h3>
+    <p><strong>Date:</strong> Friday, January 23rd, 2026</p>
+    <p><strong>Venue:</strong> Kingdom Hall Of Jehovah's Witnesses, Gwarinpa, Abuja</p>
+    <p><strong>Time:</strong> 11:00 AM</p>
+    <p><strong>Reception:</strong> Bromley Events Place, Gwarinpa, Abuja</p>
+    <p><strong>Reception Time:</strong> 01:30 PM</p>
+  </div>
+
   <!-- 📝 Important Notice Section -->
   <div class="notice">
     <h3>Important Notice</h3>
@@ -144,21 +170,23 @@
       <li>This event is <strong>strictly by invitation only</strong>, unless otherwise stated on your invitation.</li>
       <li><strong>Adults only.</strong></li>
       <li>Kindly RSVP by <strong>January 20th, 2026</strong>. Please respond as soon as possible.</li>
-      <li>Spraying of money is <strong>not permitted.</strong> If you wish to give a gift, please send to:<br>
-        <strong>2336302810 – United Bank for Africa (UBA)<br>
-        Account Name: Naomi Ngozi Umah</strong><br>
-        (BTC and USDT are also accepted)
-      </li>
+      <li>Spraying of money is <strong>not permitted.</strong></li>
       <li>Colour of the day: <strong>Nude or White.</strong></li>
-      <li>Guests are kindly requested to <strong>exit the venue by 6:30 PM</strong>, after the reception concludes.</li>
+      <li>Guests are requested to <strong>exit by 6:30 PM</strong>, after the reception concludes.</li>
     </ul>
   </div>
 </div>
 
 <script>
+  // Get RSVP response from URL
   const params = new URLSearchParams(window.location.search);
   const rsvpResponse = params.get("rsvp") || "Unknown";
   document.getElementById("respText").textContent = rsvpResponse;
+
+  // Show event info only if the response is "Yes"
+  if (rsvpResponse.toLowerCase() === "yes") {
+    document.getElementById("eventInfo").style.display = "block";
+  }
 
   const scriptURL = "https://script.google.com/macros/s/AKfycbxf-qKBVQ-r2-gHgpUfZxDTZ5sB5FuM6c9MqaGof-cF3WZCEajRd65d3DF84FDDu--P/exec";
   const submitBtn = document.getElementById("submitBtn");
